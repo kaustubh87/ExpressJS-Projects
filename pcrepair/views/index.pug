@@ -1,5 +1,30 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .jumbotron
+    .container
+      .row
+        .col-md-7
+          h1 Computer not working?
+          p
+            | Is your computer running slow? or may be not at all? Call us now to help you out.
+          p
+            a.btn.btn-primary.btn-lg(href='#') Read More
+        .col-md-5
+          img(src='images/computer_mouse_3.jpg')
+  .row
+  .col-md-4
+    .well
+      h4 Hardware Problems?
+      p
+        We deal with all kinds of hardware issues.
+  .col-md-4
+    .well
+      h4 Software Problems?
+      p
+        We deal with all kinds of software issues.
+  .col-md-4
+    .well
+      h4 Tune Up PC
+      p
+        Is your PC running slow. We can tune it up
