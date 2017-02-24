@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var Todos = require('../models/Todos');
+const express = require('express');
+const router = express.Router();
+const Todos = require('../models/Todos');
+const bodyParser = require('body-parser');
 
 router.get('/', (req,res) => {
 
@@ -10,6 +11,24 @@ router.get('/', (req,res) => {
     res.render('index', {
       todos: todos
     });
+  });
+
+});
+
+router.post('/todo/add' , (req,res) => {
+
+var todo = new Todos({
+  text : req.body.text,
+  body : req.body.body
+});
+
+
+  todo.save((err, results) => {
+      if(err)
+      {
+        return err;
+      }
+      res.redirect('/');
   });
 
 });
