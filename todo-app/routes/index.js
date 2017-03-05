@@ -23,7 +23,7 @@ var todo = new Todos({
 });
 
 
-  todo.save((err, results) => {
+todo.save((err, results) => {
       if(err)
       {
         return err;
@@ -32,5 +32,47 @@ var todo = new Todos({
   });
 
 });
+
+router.delete('/todo/delete/:id', (req,res) => {
+    const id = req.params.id;
+    Todos.findOneAndRemove(id, (err, response) =>{
+      if(err)
+      {
+        throw err;
+      }
+      console.log('Todo Deleted');
+      res.send(200);
+    });
+});
+
+router.get('/todo/edit/:id', (req,res, next) => {
+    const id = req.params.id;
+    Todos.findById(id, (err,todo) =>{
+        if (err) {
+          throw err;
+        }
+        res.render('edit',{
+          todo: todo
+        });
+    });
+
+    });
+
+    router.post('/todo/edit/:id' , (req,res) => {
+
+    const id = req.params.id;
+    var todo = new Todos({
+      text : req.body.text,
+      body : req.body.body
+    });
+
+
+    Todos.findByIdAndUpdate(id, todo, {$set : todo},{new: true} , (err ,result) => {
+        if(err){
+          throw err;
+        }
+        //res.redirect('/');
+    });
+  });
 
 module.exports = router;
