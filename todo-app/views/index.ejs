@@ -1,8 +1,26 @@
 <% include ../views/partials/header %>
-Hello From Index
+<br />
+<br/>
+<div class="col-md-7 col-lg-7">
+<form method="post" action="/todo/add">
+  <div class="form-group">
+    <label for="todo_name">Todo Name:</label>
+    <input type="text" class="form-control"  name="text">
+  </div>
+  <div class="form-group">
+    <label for="todo_text">Todo Text:</label>
+    <input type="text" class="form-control" name="body">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
+<div class="col-md-5 col-lg-5">
 <ul>
   <% todos.forEach(function(todo){ %>
-      <li><%= todo.text %> - <%= todo.body %></li>
+      <li><%= todo.text %> - <%= todo.body %> - <a data-id="<%= todo._id %>" href="#" class="delete-todo">Delete</a>
+      <a href="/todo/edit/<%= todo._id %>">Edit</a>
+    </li>
   <% }); %>
 </ul>
+</div>
 <% include ../views/partials/footer %>
