@@ -66,7 +66,13 @@ router.get('/todo/edit/:id', (req,res, next) => {
       body : req.body.body
     });
 
-    Todos.findById(id, ())
+    Todos.findByIdAndUpdate(id, {$set : {todos: todo}}, (err, todos) => {
+        if(err)
+        {
+          throw err;
+        }
+        res.redirect('/');
+    });
   });
 
 module.exports = router;
