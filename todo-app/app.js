@@ -1,36 +1,34 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const Todos = require('./models/Todos');
+var index = require('./routes/index');
 
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/todo-app';
 
+const url = "mongodb://localhost:27017/todoapp";
+mongoose.connect(url);
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function(){
+  console.log('Connected correctly to server');
+
+});
 
 const app = express();
-const port = 4321;
+const port = 3890;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(__dirname + '/public'));
 
 app.set('views' , path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-MongoClient.connect(url, (err, database) =>{
-    console.log('MongoDB Connected...');
-    if(err) throw err;
+app.use('/', index);
 
-    db = database;
-    Todos = db.collection('todos');
-
-    app.listen(port, () => {
-      console.log('Server running on port ' +port);
-    });
-});
-
-app.get('/', (req,res,next) => {
-  Todos.find({}).toArray((err, todos) => {
-    if(err) throw err;
-    res.render('index');
-  });
+app.listen(port, () => {
+  console.log('Server running on port ' +port);
 });
