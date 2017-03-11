@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const Todos = require('./models/Todos');
 var index = require('./routes/index');
 
-
 const url = "mongodb://localhost:27017/todoapp";
 mongoose.connect(url);
 const db = mongoose.connection;
