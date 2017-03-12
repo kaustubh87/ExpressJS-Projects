@@ -9,7 +9,7 @@ const url = "mongodb://localhost:27017/todoapp";
 mongoose.connect(url);
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'Error connecting to database'));
 
 db.once('open', function(){
   console.log('Connected correctly to server');
