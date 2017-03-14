@@ -1,0 +1,11 @@
+{
+  "name": "sports-blog",
+  "version": "1.0.0",
+  "description": "Simple Sports blog app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kvin",
+  "license": "ISC"
+}
