@@ -7,6 +7,12 @@ var port = 3000;
 var flash = require('connect-flash');
 
 var app = express();
+
+var index = require('./routes/index');
+var articles = require('./routes/articles');
+var categories = require('./routes/categories');
+var manage = require('./routes/manage');
+
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 
@@ -41,9 +47,10 @@ app.use(expressValidator({
   }
 }));
 
-app.get('/', function(req,res){
-  res.send('Index');
-});
+app.use('/', index);
+app.use('/articles', articles);
+app.use('/categories', categories);
+app.use('/manage', manage);
 
 app.listen(port, function(req,res){
   console.log('Server running at ' +port);
