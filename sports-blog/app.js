@@ -5,6 +5,12 @@ var session = require('express-session');
 var expressValidator = require('express-validator');
 var port = 3000;
 var flash = require('connect-flash');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/sportsblog');
+
+var db = mongoose.connection;
+
 
 var app = express();
 
