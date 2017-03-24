@@ -1,13 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
+var Category = require('../models/categories.js');
 
 router.get('/articles', function(req,res){
     res.render('manage_articles', {title: 'Manage Articles'});
 });
 
 router.get('/categories', function(req,res){
-  res.render('manage_categories' , { title: 'Manage Categories'});
+
+  Category.getCategories(function(err, categories){
+
+    if(err)
+    {
+      throw err;
+    }
+    res.render('manage_category' , {
+      title: 'Manage Categories',
+      categories: categories
+    });
+  });
+
 });
 
 router.get('/articles/add', function(req,res){
