@@ -42,7 +42,6 @@ router.post('/edit/:id', function(req,res,next){
     description: req.body.description
   };
 
-
   Category.updateCategory(query, update, {}, function(err,category){
     if(err)
     {
@@ -50,6 +49,21 @@ router.post('/edit/:id', function(req,res,next){
     }
   res.redirect('/manage/categories');
   });
+});
+
+//Delete Category
+
+router.delete('/delete/:id' , function(req,res,next){
+  var query = {_id : req.params.id}
+
+  Category.removeCategory(query, function(err, category){
+    if(err)
+    {
+      res.send(err);
+    }
+    res.status(200);
+  });
+
 });
 
 module.exports = router;
