@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Article = require('../models/Articles.js');
+var Article = require('../models/article.js');
 
 router.get('/', function(req,res){
   res.render('articles', {title: 'Articles'});
@@ -14,7 +14,7 @@ router.get('/category/:category_id', function(req,res){
   res.render('articles', {title: 'Category Articles'});
 });
 
-router.post('/articles/add', function(req,res){
+router.post('/add', function(req,res){
   var article = new Article();
   article.title = req.body.title;
   article.subtitle = req.body.subtitle;
