@@ -42,22 +42,22 @@ var articleSchema = mongoose.Schema({
 
 });
 
-var Category = module.exports = mongoose.model('Category', categorySchema);
+var Article = module.exports = mongoose.model('Article', articleSchema);
 
-// Get Categories
-module.exports.getCategories = function(callback, limit){
-  Category.find(callback).limit(limit).sort([['title', 'ascending']]);
+// Get Articles
+module.exports.getArticles = function(callback, limit){
+  Article.find(callback).limit(limit).sort([['title', 'ascending']]);
 };
 
-//Add Category
-module.exports.addCategory = function(category, callback){
-  Category.create(category, callback);
+//Add Article
+module.exports.addArticle = function(category, callback){
+  Article.create(category, callback);
 };
 
-//get Single category by ID
+//get Single Article by ID
 
-module.exports.getCategoryById = function(id, callback){
-  Category.findById(id, callback);
+module.exports.getArticleById = function(id, callback){
+  Article.findById(id, callback);
 };
 
 //Update Category
