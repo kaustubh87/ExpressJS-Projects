@@ -60,14 +60,14 @@ module.exports.getArticleById = function(id, callback){
   Article.findById(id, callback);
 };
 
-//Update Category
+//Update Article
 
-module.exports.updateCategory = function(query,update,options,callback){
-  Category.findOneAndUpdate(query, update, options, callback);
+module.exports.updateArticle = function(query,update,options,callback){
+  Article.findOneAndUpdate(query, update, options, callback);
 };
 
-//Delete Category
+//Remove Article
 
-module.exports.removeCategory = function(query, callback){
-  Category.removeCategory(query,callback);
+module.exports.removeArticle = function(query, callback){
+  Article.removeCategory(query,callback);
 };
