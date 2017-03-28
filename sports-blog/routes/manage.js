@@ -24,7 +24,19 @@ router.get('/categories', function(req,res){
 });
 
 router.get('/articles/add', function(req,res){
-  res.render('add_article', {title: 'Create Article'});
+
+  Category.getCategories(function(err, categories){
+    if(err)
+    {
+      res.send(err);
+    }
+    res.render('add_article',
+    {
+      title: 'Create Article',
+      categories: categories
+    });
+  });
+
 });
 
 router.get('/categories/add', function(req,res){
