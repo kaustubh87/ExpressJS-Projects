@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Category = require('../models/categories.js');
-var Articles = require('../models/articles.js');
+var Article = require('../models/article.js');
 
 router.get('/articles', function(req,res){
     Article.getArticles(function(err, articles){
@@ -55,7 +55,17 @@ router.get('/categories/add', function(req,res){
 });
 
 router.get('/articles/edit/:id', function(req,res){
-  res.render('edit_article', {title: 'Edit Article'});
+  Article.getArticleById(req.params.id, function(err, article){
+    if(err)
+    {
+      throw err;
+    }
+    res.render('edit_article', {
+      title: 'Edit Article',
+      article: article
+    });
+  });
+
 });
 
 router.get('/categories/edit/:id', function(req,res){
