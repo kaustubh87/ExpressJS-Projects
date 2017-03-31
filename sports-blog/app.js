@@ -29,6 +29,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Express session
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
+}));
+
 app.use(require('connect-flash')());
 app.use(function(req,res,next){
   res.locals.messages = require('express-messages')(req,res);
