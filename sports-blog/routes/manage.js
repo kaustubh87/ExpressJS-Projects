@@ -60,10 +60,14 @@ router.get('/articles/edit/:id', function(req,res){
     {
       throw err;
     }
+  Category.getCategories(function(err, categories){
     res.render('edit_article', {
       title: 'Edit Article',
-      article: article
+      article: article,
+      categories: categories
     });
+  });
+
   });
 
 });
