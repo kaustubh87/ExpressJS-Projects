@@ -10,16 +10,20 @@ var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 
 var app = express();
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
+mongoose.connect('mongodb://localhost:27017/passportapp', function(req,res){
+    console.log('Database connected');
+});
 //Express Session
 
 app.use(session({
@@ -28,14 +32,18 @@ app.use(session({
     resave: true
 }));
 
+//Initialize middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Express messages
 
-app.use(require('connect-flash')());
+app.use(flash());
 app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+    next();
 });
-
 
 
 //Express Validator from github
@@ -58,6 +66,8 @@ app.use(expressValidator({
 }));
 
 app.use('/', index);
-app.use('/users', users);
+//app.use('/users', users);
 
-app.listen(process.env.PORT || )
+app.listen(port , function(request, response, next){
+    console.log('Server started on ' +port);
+});
