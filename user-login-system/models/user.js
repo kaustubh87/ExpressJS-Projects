@@ -21,7 +21,7 @@ var UserSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+var User = module.exports = mongoose.model('User', UserSchema);
 
 module.exports.registerUser = function(newUser, user){
     bcrypt.genSalt(10, (function(err, salt){
@@ -33,5 +33,25 @@ module.exports.registerUser = function(newUser, user){
             newUser.save(user);
         });
     }));
+}
+
+
+module.exports.getUserByUsername = function(username, callback){
+  var query = {username: username};
+  User.findOne(query, callback);
+}
+
+module.exports.getUserById = function(id, user){
+    User.findById(id, user);
+}
+
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+  bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+    if(err) 
+    {
+        throw err;
+    }
+    callback(null, isMatch);
+  });
 }
 
