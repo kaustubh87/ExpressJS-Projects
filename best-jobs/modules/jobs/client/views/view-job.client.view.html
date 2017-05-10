@@ -8,8 +8,21 @@
            <li class="list-group-item"><strong>Contact Email: </strong>{{vm.job.contact_email}}</li>
            <li class="list-group-item"><strong>Contact Website: </strong>{{vm.job.contact_website}}</li>
            <li class="list-group-item"><strong>Contact Phone: </strong>{{vm.job.contact_phone}}</li>
-         
       </ul>
+      
+      <div ng-if="vm.job.how_to_apply == 'website'">
+        <a class="btn btn-primary" target="_blank" href="{{vm.job.contact_website}}">Apply Now</a>
+      
+      </div>
+      <div ng-if="vm.job.how_to_apply == 'email'">
+          <a class="btn btn-primary" target="_blank" href="mailto:{{vm.job.contact_email}}?Subject=Application">Apply Now</a>
+      </div>
+      
+      <div ng-if="vm.job.how_to_apply == 'phone'">
+          <h4>Call to Apply: {{vm.job.contact_phone}}</h4>
+      
+      </div>
+      
   </div>
   <div class="pull-right"
        ng-show="vm.job.isCurrentUserOwner">
