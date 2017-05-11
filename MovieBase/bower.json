@@ -1,0 +1,21 @@
+{
+  "name": "moviebase",
+  "description": "Simple Movie Listing app using Kraken.js",
+  "main": "index.js",
+  "author": "Kaustubh vinzanekar",
+  "moduleType": [
+    "amd"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "^2.1.16"
+  }
+}
