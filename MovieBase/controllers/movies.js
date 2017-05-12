@@ -27,6 +27,15 @@ module.exports = function (router) {
     });
     
     
+    //Add Movies
+    
+    router.get('/add', function(req,res){
+       
+        res.render('addmovies');
+        
+    });
+    
+    
     
     
 
