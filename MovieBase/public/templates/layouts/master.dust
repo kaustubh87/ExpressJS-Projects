@@ -9,7 +9,11 @@
     </head>
     <body>
 
+        
         <div id="wrapper">
+            {#errors}
+            <div class="alert-box alert">{.msg}</div>
+            {/errors}
             {+body /}
         </div>
 
