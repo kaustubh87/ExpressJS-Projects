@@ -4,7 +4,7 @@
    <div class="row">
        <a href='/movies'>Go Back</a>
        <h2>Add Movie</h2>
-       <form>
+       <form method="post" action="/movies/add">
            <div>
                 <label>Title *
                 <input type="text" name="title" placeholder="Add Title">
