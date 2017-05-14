@@ -11,6 +11,12 @@
                </label>
            </div>
            
+            <div>
+                <label>Director 
+                <input type="text" name="director" placeholder="Add Director">
+               </label>
+           </div>
+           
            <div>
                 <label>Release Date *
                 <input type="date" name="release_date">
