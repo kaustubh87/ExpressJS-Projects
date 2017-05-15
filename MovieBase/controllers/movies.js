@@ -58,7 +58,7 @@ module.exports = function (router) {
             
             
             var newMovie = new Movie({
-               title: title,
+                title: title,
                 release_date :release_date,
                 genre: genre,
                 director: director,
@@ -80,6 +80,50 @@ module.exports = function (router) {
         }
         
     });
+    
+    
+    //Details page
+    
+    router.get('/details/:id',  function(req,res){
+       Movie.findOne({_id: req.params.id}, function(err, movie){
+          if(err)
+              {
+                  res.send(err);
+              }
+           res.render('details',{movie: movie});
+       }); 
+        
+    });
+    
+    //Delete a movie
+    
+    router.delete('/delete/:id', function(req,res){
+       
+        Movie.remove({_id: req.params.id}, function(err){
+           
+            if(err){
+                res.send(err);
+            }
+            res.status(204).send();
+        });
+        
+    });
+    
+    //Edit a Movie
+    router.get('/edit/:id', function(req,res){
+       
+        Movie.findOne({_id: req.params.id}, function(err,movie){
+            if(err){
+                res.send(err);
+            }
+            res.render('editmovie', {movie: movie});
+        });
+        
+        
+        
+    });
+    
+    
     
 
 };
