@@ -7,7 +7,7 @@
        <form method="post" action="/movies/edit/{movie._id}">
            <div>
                 <label>Title *
-                <input type="text" name="title" placeholder="Add Title" value="movie.title">
+                <input type="text" name="title" placeholder="Add Title" value="{movie.title}">
                </label>
            </div>
            
@@ -19,7 +19,7 @@
            
            <div>
                 <label>Release Date *
-                <input type="date" name="release_date">
+                <input type="date" name="release_date" id="release_date">
                </label>
            </div>
            
@@ -59,10 +59,28 @@
              <input type="submit" value="submit" class="button">
            </div>
            
-           <input type="hidden" name="_csrf" value="{_csrf}">
+          
           
            
       </form>
    </div>
+<div id="grab_date" style="display:none;">
+{movie.release_date}
+</div>
+<script>
 
+var release_date = document.getElementById('grab_date').innerHTML;
+
+Date.prototype.toDateInputValue = (function(){
+
+    var local = new Date(release_date);
+    local.setMunutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+    
+});
+                                   
+document.getElementById('release_date').value = new Date().toDateInputValue();
+
+
+</script>
 {/body}
