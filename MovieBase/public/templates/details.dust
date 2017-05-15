@@ -23,6 +23,14 @@
 <div class="row">
     <h3>Movie Plot</h3>
     <p>{movie.plot}</p>
-
 </div>
+<hr>
+<div class="row">
+    <h3>Trailer</h3>
+    <iframe width="600" height="315" src="https://www.youtube.com/embed/{movie.trailer}" frameborder="0" allowfullscreen></iframe>
+</div>
+<br>
+<a href="/movies/edit/{movie._id}">Edit</a> | 
+<a href="#" class="delete-movie" data-movie-id="{movie._id}">
+    <br>
 {/body}
