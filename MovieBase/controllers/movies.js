@@ -124,6 +124,56 @@ module.exports = function (router) {
     });
     
     
+    //Update movie details
     
+    router.post('/edit/:id', function(req,res){
+        
+        req.checkBody('title', 'Title is required').notEmpty();
+        
+        var errors = req.validationErrors();
+        
+        if(errors){
+            
+              Movie.findOne({_id: req.params.id}, function(err,movie){
+            if(err){
+                res.send(err);
+            }
+            res.render('editmovie', {err: err, movie: movie});
+        });
+        
+        }
+        else{
+            
+            var title = req.body.title && req.body.title.trim();
+            var release_date = req.body.release_date && req.body.release_date.trim();
+            var genre = req.body.genre && req.body.genre.trim();
+            var director = req.body.director && req.body.director.trim();
+            var plot = req.body.plot && req.body.plot.trim();
+            var trailer = req.body.trailer && req.body.trailer.trim();
+            var cover = req.body.cover && req.body.cover.trim();
+            
+            
+            var updateMovie = {
+                title: title,
+                release_date :release_date,
+                genre: genre,
+                director: director,
+                plot: plot,
+                trailer: trailer,
+                cover: cover    
+            };
+            
+            Movie.update({_id: req.params.id},updateMovie, function(err, movie){
+                if(err){
+                    res.send(err);
+                }
+                res.redirect('/movies');
+            });
+            
+           
+        }
+        
+    });
+      
 
 };
