@@ -2,8 +2,8 @@
 
 {<body}
     {#movies}
-        <div>
-            <img src="{.cover}">
+        <div class="large-4 columns end">
+            <img src="{.cover}" class="th">
             <h3>{.title}</h3>
             <a class="button" href="/movies/details/{._id}">Info</a>
         </div>
