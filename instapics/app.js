@@ -78,12 +78,33 @@ app.get('/', function(req,res,next){
 //Main Route
 
 app.get('/main', function(req,res,next){
-    res.render('main', {title: 'My Instagram'});
+    api.user(req.session.uid, function(err, result, remaining, limit){
+        console.log(result);
+        if(err)
+            {
+                res.send(err);
+            }
+        res.render('main', 
+        {
+            title: 'My Instagram',
+            user: result
+        });
+    });
+    
 });
 
 //Login Route
 
 app.get('/login', exports.authorize_user);
+
+//Logout Route
+
+app.get('/logout', function(req,res,next){
+    
+    req.session.accesstoken = false;
+    req.session.uid = false;
+    res.redirect('/');
+});
 
 // Handle Auth
 
