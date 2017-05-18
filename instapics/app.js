@@ -29,6 +29,13 @@ app.use(session({
 }));
 
 app.use(function(req,res,next){
+        if(req.session.accesstoken && req.session.accesstoken != 'undefined'){
+    res.locals.isLoggedIn = true;
+}
+else{
+    res.locals.isLoggedIn = false;
+}
+    
     next();
 });
 
@@ -75,6 +82,9 @@ app.get('/', function(req,res,next){
     
 });
 
+
+
+
 //Main Route
 
 app.get('/main', function(req,res,next){
@@ -84,11 +94,19 @@ app.get('/main', function(req,res,next){
             {
                 res.send(err);
             }
-        res.render('main', 
-        {
+        //Fetch media content
+        api.user_media_recent(req.session.uid, {}, function(err,medias,pagination,remaining,limit){
+            if(err){
+                res.send(err);
+            }
+             res.render('main', 
+            {
             title: 'My Instagram',
-            user: result
+            user: result,
+            medias: medias
+            });
         });
+       
     });
     
 });
