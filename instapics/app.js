@@ -32,6 +32,42 @@ app.use(function(req,res,next){
     next();
 });
 
+
+
+api.use({
+    client_id :'1caecf6d65d8452e812ea6d354f4410b',
+    client_secret:'3122d823f6824704ac557415e769db5d'
+});
+
+var redirect_uri = 'http://localhost:3000/handleauth';
+
+exports.authorize_user = function(req,res){
+  res.redirect(api.get_authorization_url(redirect_uri, {scope: ['likes'], state: 'a state'}));  
+};
+
+exports.handleauth = function(req, res) {
+  api.authorize_user(req.query.code, redirect_uri, function(err, result) {
+    if (err) {
+      console.log(err.body);
+      res.send("Didn't work");
+    } else {
+        /*
+      console.log('Access Token ' + result.access_token);
+        console.log('User ID ' + result.user.id);
+      res.send('You made it!!');
+      */
+        req.session.accesstoken = result.access_token;
+        req.session.uid = result.user.id;
+        
+        api.use({
+            access_token: req.session.accesstoken
+        });
+        
+        res.redirect('/main');
+    }
+  });
+};
+
 //Index Route
 
 app.get('/', function(req,res,next){
@@ -39,6 +75,19 @@ app.get('/', function(req,res,next){
     
 });
 
+//Main Route
+
+app.get('/main', function(req,res,next){
+    res.render('main', {title: 'My Instagram'});
+});
+
+//Login Route
+
+app.get('/login', exports.authorize_user);
+
+// Handle Auth
+
+app.get('/handleauth', exports.handleauth);
 
 
 // catch 404 and forward to error handler
