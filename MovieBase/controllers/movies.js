@@ -99,7 +99,7 @@ module.exports = function (router) {
     
     router.delete('/delete/:id', function(req,res){
        
-        Movie.remove({_id: req.params.id}, function(err){
+        Movie.findByIdAndRemove({_id: req.params.id}, function(err){
            
             if(err){
                 res.send(err);
@@ -174,6 +174,42 @@ module.exports = function (router) {
         }
         
     });
-      
-
+    
+    
+    //Search Movies
+    
+    router.post('/search', function(req, res){
+       Movie.search(req.body.searchText,{title: 1, plot: 1, cover: 1}, {
+           conditions: {title:{$exists: true}, plot: {$exists: true},  cover:{$exists: true}},
+           sort: {title: 1}, 
+           limit: 10
+       }, function(err,movies){
+           if(err){
+               res.send(err);
+           }
+           
+           var model = {
+               movies: movies.results
+           }
+           res.render('movies', model);
+       });
+    });
+    
+    router.get('/genre/:genre', function(req,res){
+       Movie.find({genre: req.params.genre}, function(err, movies){
+          
+           if(err){
+               res.send(err);
+           }
+           
+           var model = {
+               movies: movies
+           }
+           
+           res.render('movies', model);
+       });
+        
+        
+    });
+    
 };

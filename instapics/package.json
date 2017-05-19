@@ -11,10 +11,11 @@
     "debug": "~2.6.3",
     "ejs": "~2.5.6",
     "express": "~4.15.2",
-    "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2",
+    "express-session": "*",
     "instagram-node": "*",
-    "express-session" :"*",
-    "moment" :"*"
+    "moment": "*",
+    "morgan": "~1.8.1",
+    "nodemon": "^1.11.0",
+    "serve-favicon": "~2.4.2"
   }
 }

@@ -17,9 +17,11 @@
     "dust-makara-helpers": "^4.2.0",
     "eslint": "^1.10.3",
     "express": "^4.12.2",
+    "express-validator": "^3.2.0",
     "kraken-js": "^2.0.0",
     "makara": "^2.0.3",
     "mongoose": "^4.9.8",
+    "mongoose-search-plugin": "^0.1.2",
     "nodemon": "^1.11.0",
     "requirejs": "^2.3.3"
   },

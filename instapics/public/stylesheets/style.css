@@ -2,6 +2,13 @@ body {
  background: #f4f4f4;
 }
 
+img{
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 4px;
+    border-radius: 15px;
+}
+
 .redbox, .greenbox, .bluebox{
     padding: 10px 5px;
     border: #ccc 1px solid;
